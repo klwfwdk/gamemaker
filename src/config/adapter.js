@@ -36,13 +36,13 @@ exports.model = {
   },
   mysql: {
     handle: mysql,
-    database: '',
+    database: 'game',
     prefix: 'think_',
     encoding: 'utf8',
     host: '127.0.0.1',
-    port: '',
+    port: '3306',
     user: 'root',
-    password: 'root',
+    password: '1234567',
     dateStrings: true
   }
 };
@@ -105,5 +105,25 @@ exports.logger = {
     pattern: '-yyyy-MM-dd',
     alwaysIncludePattern: true,
     filename: path.join(think.ROOT_PATH, 'logs/app.log')
+  }
+};
+
+const socketio = require('think-websocket-socket.io');
+exports.websocket = {
+  type: 'socketio',
+  common: {
+    // common config
+  },
+  socketio: {
+    handle: socketio,
+    allowOrigin: null, // 默认所有的域名都允许访问
+    path: '/socket.io', // 默认 '/socket.io'
+    adapter: null, // 默认无 adapter
+    messages: {
+      open: '/websocket/open',
+      close: '/websocket/close', // websocket action when close
+      addUser: '/websocket/addUser',
+      joinRoom: '/websocket/joinRoom'
+    }
   }
 };
